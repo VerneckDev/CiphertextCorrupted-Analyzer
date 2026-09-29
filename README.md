@@ -1,4 +1,4 @@
-# Ciphertext-Corrupted-Analyzer
+# Ciphertext/Corrupted data Analyzer
 
 A toolkit of two standalone Python scripts for inspecting suspected ciphertext and diagnosing corruption or tampering between two versions of the same byte sequence. Neither script decrypts anything: they work purely on statistical properties, structural patterns, and byte-by-byte comparison to help you decide *what* might be wrong with a file before you try to fix it.
 
