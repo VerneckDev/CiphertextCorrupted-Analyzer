@@ -1113,7 +1113,7 @@ def main() -> None:
 
         try:
 
-            result = analyze_file(file_path, assume_plaintext=args.plaintext)
+            result = analyze_file(file_path, assume_plaintext=args.Plaintext)
             results.append(result)
 
         except Exception as exc:
@@ -1124,9 +1124,9 @@ def main() -> None:
 
         raise SystemExit(1)
 
-    comparisons = compare_files(results) if args.compare and len(results) >= 2 else [] # Perform pairwise comparisons of the analyzed files if the --compare flag is set and there are at least two results
+    comparisons = compare_files(results) if args.Compare and len(results) >= 2 else [] # Perform pairwise comparisons of the analyzed files if the --compare flag is set and there are at least two results
 
-    if args.json:
+    if args.son:
 
         serializable = []
 
@@ -1143,9 +1143,9 @@ def main() -> None:
 
     for result in results:
 
-        print_report(result, verbose=args.verbose) # Print a detailed report for each analyzed file, including metrics, text analysis, block analysis, padding analysis, and classification
+        print_report(result, verbose=args.Verbose) # Print a detailed report for each analyzed file, including metrics, text analysis, block analysis, padding analysis, and classification
 
-        if args.histogram:
+        if args.Histogram:
 
             print(f"Histogram: {histo(result['_data'], result['file'])}") # Generate and print the path to a byte-frequency histogram PNG for the analyzed file if the --histogram flag is set
 
