@@ -55,7 +55,7 @@ def comparison(raw, encrypted):
 
         if raw[i] != encrypted[i]:
 
-            diffs.append({"indice": i, "posicao": i + 1, "raw": raw[i], "encrypted": encrypted[i]}) # Append a dictionary containing the index, position, raw byte, and encrypted byte to the diffs list
+            diffs.append({"index": i, "position": i + 1, "raw": raw[i], "encrypted": encrypted[i]}) # Append a dictionary containing the index, position, raw byte, and encrypted byte to the diffs list
 
     return diffs
 
@@ -138,7 +138,7 @@ def detc_groups(diffs):
 
             linked_idx.add(diffs[i]["index"])
 
-    return swaps, chains, linked_idx # Return the lists of swaps, chains, and the set of linked indices
+    return swaps, chains, linked_idx # Return the lists of swaps, chains, and the set of linked index
 
 def changes(diffs, linked_idx):
 
@@ -150,7 +150,7 @@ def changes(diffs, linked_idx):
 
             continue
 
-        chang.append({"posicao": d["position"], "raw": d["raw"], "encrypted": d["encrypted"]})
+        chang.append({"position": d["position"], "raw": d["raw"], "encrypted": d["encrypted"]})
 
     return chang # Return the list of changes that are not part of any swap or chain
 
@@ -199,25 +199,25 @@ def sizes(raw, encrypted):
 
                 if i not in raw_set:
 
-                    delt.append({"posicao": i1 + i + 1, "byte": byte}) # Record the deletion of the raw byte that was not matched
+                    delt.append({"position": i1 + i + 1, "byte": byte}) # Record the deletion of the raw byte that was not matched
 
             for j, byte in enumerate(enc_reg):
 
                 if j not in enc_set:
 
-                    insert.append({"posicao": j1 + j + 1, "byte": byte}) # Record the insertion of the encrypted byte that was not matched
+                    insert.append({"position": j1 + j + 1, "byte": byte}) # Record the insertion of the encrypted byte that was not matched
 
         elif tag == "delete":
 
             for i in range(i1, i2):
 
-                delt.append({"posicao": i + 1, "byte": raw[i]}) # Record the deletion of the raw byte
+                delt.append({"position": i + 1, "byte": raw[i]}) # Record the deletion of the raw byte
 
         elif tag == "insert":
 
             for j in range(j1, j2):
 
-                insert.append({"posicao": j + 1, "byte": encrypted[j]}) # Record the insertion of the encrypted byte
+                insert.append({"position": j + 1, "byte": encrypted[j]}) # Record the insertion of the encrypted byte
 
     return (moves, delt, insert) # Return the lists of moves, deletions, and insertions
 
@@ -251,7 +251,7 @@ def report(swaps, chains, chang, moves, delt, insert, path):
 
                 for d in chain:
 
-                    f.write("  Position {}: byte {:02x} -> {:02x}\n".format(d["posicao"], d["raw"], d["encrypted"]))
+                    f.write("  Position {}: byte {:02x} -> {:02x}\n".format(d["position"], d["raw"], d["encrypted"]))
 
             f.write("\n")
 
@@ -261,7 +261,7 @@ def report(swaps, chains, chang, moves, delt, insert, path):
 
             for m in chang:
 
-                f.write("Position {}: byte {:02x} was changed to {:02x}\n".format(m["posicao"], m["raw"], m["encrypted"]))
+                f.write("Position {}: byte {:02x} was changed to {:02x}\n".format(m["position"], m["raw"], m["encrypted"]))
 
             f.write("\n")
 
@@ -281,7 +281,7 @@ def report(swaps, chains, chang, moves, delt, insert, path):
 
             for e in delt:
 
-                f.write("Position {}: byte {:02x} was deleted\n".format(e["posicao"], e["byte"]))
+                f.write("Position {}: byte {:02x} was deleted\n".format(e["position"], e["byte"]))
 
             f.write("\n")
 
@@ -291,7 +291,7 @@ def report(swaps, chains, chang, moves, delt, insert, path):
 
             for i in insert:
 
-                f.write("Position {}: byte {:02x} was inserted\n".format(i["posicao"], i["byte"]))
+                f.write("Position {}: byte {:02x} was inserted\n".format(i["position"], i["byte"]))
 
             f.write("\n")
 
@@ -320,7 +320,7 @@ def show_diffs(diffs):
 
     for d in diffs:
 
-        print("Position {:4d}: {:02x} -> {:02x}".format(d["posicao"], d["raw"], d["encrypted"]))
+        print("Position {:4d}: {:02x} -> {:02x}".format(d["position"], d["raw"], d["encrypted"]))
 
     print("=" * 70)
 
@@ -391,8 +391,8 @@ def main():
         (moves, delt, insert) = sizes(raw, encrypted)
 
     base = os.path.splitext(encrypted_file)[0]
-    report_file = (base + "_relatorio.txt")
-    fixed_file = (base + "_corrigido.dat")
+    report_file = (base + "_report.txt")
+    fixed_file = (base + "_corrected.dat")
 
     cclear(report_file, fixed_file)
     report(swaps, chains, chang, moves, delt, insert, report_file)
