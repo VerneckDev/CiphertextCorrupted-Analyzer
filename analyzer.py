@@ -1126,7 +1126,7 @@ def main() -> None:
 
     comparisons = compare_files(results) if args.Compare and len(results) >= 2 else [] # Perform pairwise comparisons of the analyzed files if the --compare flag is set and there are at least two results
 
-    if args.son:
+    if args.Json:
 
         serializable = []
 
