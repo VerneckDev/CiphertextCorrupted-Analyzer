@@ -1093,11 +1093,11 @@ def main() -> None:
 
     parser = argparse.ArgumentParser(description="Heuristic analyzer for encrypted/binary files.")
     parser.add_argument("files", nargs="+", help="Files to analyze")
-    parser.add_argument( "-c", "--compare", action="store_true", help="Compare every pair of input files")
-    parser.add_argument( "-v", "--verbose", action="store_true", help="Show more detailed information")
-    parser.add_argument("-pl", "--plaintext", action="store_true", help="Treat input as plaintext when checking padding")
-    parser.add_argument("-j", "--json", action="store_true", help="Output JSON instead of the text report")
-    parser.add_argument("-hst", "--histogram", action="store_true", help="Generate a byte-frequency histogram PNG")
+    parser.add_argument( "-C", "--Compare", action="store_true", help="Compare every pair of input files")
+    parser.add_argument( "-V", "--Verbose", action="store_true", help="Show more detailed information")
+    parser.add_argument("-P", "--Plaintext", action="store_true", help="Treat input as plaintext when checking padding")
+    parser.add_argument("-J", "--Json", action="store_true", help="Output JSON instead of the text report")
+    parser.add_argument("-H", "--Histogram", action="store_true", help="Generate a byte-frequency histogram PNG")
 
     args = parser.parse_args()
 
