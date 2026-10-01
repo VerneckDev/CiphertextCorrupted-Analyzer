@@ -91,29 +91,29 @@ Any previous copies of these two files are deleted before a new run, so re-runni
 python analyzer.py suspicious.bin
 
 # Verbose report (byte frequency table, ASCII strings, n-grams)
-python analyzer.py suspicious.bin -v
+python analyzer.py suspicious.bin -V
 
 # Compare two or more files pairwise
-python analyzer.py file_a.bin file_b.bin -c
+python analyzer.py file_a.bin file_b.bin -C
 
 # Treat the input as known plaintext (padding checks become meaningful)
-python analyzer.py plaintext.bin -pl
+python analyzer.py plaintext.bin -P
 
 # Machine-readable output
-python analyzer.py suspicious.bin -j > report.json
+python analyzer.py suspicious.bin -J > report.json
 
 # Also generate a byte-frequency histogram PNG
-python analyzer.py suspicious.bin -hst
+python analyzer.py suspicious.bin -H
 ```
 
 | Flag | Description |
 |---|---|
 | `files` | One or more files to analyze (positional) |
-| `-c`, `--compare` | Compare every pair of input files |
-| `-v`, `--verbose` | Show byte-frequency table, ASCII strings, and n-grams |
-| `-pl`, `--plaintext` | Treat input as plaintext when checking padding |
-| `-j`, `--json` | Output JSON instead of the text report |
-| `-hst`, `--histogram` | Generate a byte-frequency histogram PNG (requires `matplotlib`) |
+| `-C`, `--compare` | Compare every pair of input files |
+| `-V`, `--verbose` | Show byte-frequency table, ASCII strings, and n-grams |
+| `-P`, `--plaintext` | Treat input as plaintext when checking padding |
+| `-J`, `--json` | Output JSON instead of the text report |
+| `-H`, `--histogram` | Generate a byte-frequency histogram PNG (requires `matplotlib`) |
 
 ### `diff_find.py`
 
